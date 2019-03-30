@@ -61,7 +61,8 @@ for af in range(AFm+1): #Prva zanka za AF
 			ED.pretok=CE.pretok-EG.pretok
 			DF.pretok=BD.pretok+ED.pretok
 			FG.pretok=AF.pretok+DF.pretok+F
-			#Preverimo pogoje; povezave > 0 in novi strški < starih
+			
+			#Preverimo pogoje; povezave > 0 in novi stroški < starih
 			if(all(i.pretok>=0 for i in povezave) and cf(povezave) < minCost): 
 				minCost = cf(povezave)
 				l = [i.pretok for i in povezave]
