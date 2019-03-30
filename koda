@@ -1,0 +1,45 @@
+'''Definiramo funkcijo, ki programu vrne izracunane stroske pretoka; to je funkcija, ki jo zelimo minimalizirati.'''
+def cf(AB, AF, BC, BD, CE, DF, ED, EG, FG):
+	return(AB*200+AF*500+BC*200+BD*400+CE*200+DF*200+ED*200+EG*500+FG*100)
+
+
+'''Definramo izvore in ponore materiala'''
+A=40
+B=80
+C=20
+F=-90
+G=-50
+
+'''Definiramo omejitve pretoka na nekaterih povezavah'''
+AFm=20
+BDm=80
+EGm=60
+
+'''Inicializiramo seznam, ki zajema stroske pretoka (na prvem mestu)
+in vse pretoke v formatu [AB, AF, BC, BD, CE, DF, ED, EG, FG].
+Zacetni stroski so zelo visoki, saj zelimo, da jih program nadomesti
+z manjsimi vrednostmi.'''
+
+minCost=[200000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+'''Sledi algoritem, ki vsebuje tri vgnezdene zanke. Vsaka izmed zank inkrementira vrednosti
+pretokov po omejenih poteh (torej poteh AF, BC in EG) od nič do maksimalne vrednosti,
+in s tem preizkusi vse možne kombinacije, ter sproti preračuna preostale pretoke, ki smo jih definirali z enacbami.
+V sredini vseh zank je pogojna izjava, ki v primeru skladanja s pogoji (vsi pretoki > 0; stroški < prejšnjih)
+posodobi seznam minCost, ki smo ga inicializirali prej ter ga natisne.'''
+
+for AF in range(AFm+1): #Prva zanka za AF
+	AB=A-AF
+	for BD in range(BDm+1):
+		BC=AB+B-BD
+		CE=BC+C
+		for EG in range(EGm+1):
+			ED=CE-EG
+			DF=BD+ED
+			FG=AF+DF+F
+			if(AB>=0 and AF>=0 and BC>=0 and BD>=0 and CE>=0 and DF>=0 and ED>=0 and EG>=0 and FG>=0 and cf(AB, AF, BC, BD, CE, DF, ED, EG, FG) < minCost[0]):
+				minCost = [cf(AB, AF, BC, BD, CE, DF, ED, EG, FG), AB, AF, BC, BD, CE, DF, ED, EG, FG]
+				print(minCost)
+
+'''Zadnji natiskan seznam vsebuje kombinacijo pretokov  minimalnimi strosko'''
