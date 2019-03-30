@@ -1,4 +1,4 @@
-*Datoteke so dostopne s povezavami nad tem besedilom.*
+*Datoteke so dostopne na povezavah nad tem besedilom.*
 
 # Problem minimalnih stroskov pretoka
 Koda je dokaz optimalne rešitve problema minimalih stroškov pretoka. Gre za "brute-force" algoritem, ki preizkusi vse možne kombinacije spremenljivk in s tem poišče optimalno rešitev.
