@@ -1,6 +1,8 @@
 # Problem minimalnih stroskov pretoka
 Koda je dokaz optimalne rešitve problema minimalih stroškov pretoka. Gre za "brute-force" algoritem, ki preizkusi vse možne kombinacije spremenljivk in s tem poišče optimalno rešitev.
 
+Oblika grafa je grafično prikazana na sliki pod zavihkom "graf.png".
+
 Problem je oblikoval Tine Kalač v sklopu predmeta Kvantitativne metode in statistika, Ljubljana 2019.
 
 # Uporaba
