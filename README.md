@@ -14,8 +14,10 @@ https://www.onlinegdb.com/online_python_interpreter
 2. Kopirajte kodo iz datoteke 'koda_programa' in jo prilepite v zgornje črno polje interpretatorja
 3. Zaženite kodo s klikom na zeleni gumb "RUN".
 
-Rezultati se bodo izpisali v spodnjem črnem polju v formatu [stroški, AB, AF, BC, BD, CE, DF, ED, EG, FG].
+Rezultati se bodo izpisali v spodnjem črnem polju v formatu
+[stroški, AB, AF, BC, BD, CE, DF, ED, EG, FG]
 Zadnji izpisan rezultat je optimalna rešitev problema.
+
 
 
 *Problem je oblikoval Tine Kalač v sklopu predmeta Kvantitativne metode in statistika, Ljubljana 2019.*
