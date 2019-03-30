@@ -15,7 +15,7 @@ https://www.onlinegdb.com/online_python_interpreter
 3. Zaženite kodo s klikom na zeleni gumb "RUN".
 
 Rezultati se bodo izpisali v spodnjem črnem polju v formatu
-[stroški, AB, AF, BC, BD, CE, DF, ED, EG, FG]
+[stroški, AB, AF, BC, BD, CE, DF, ED, EG, FG].
 Zadnji izpisan rezultat je optimalna rešitev problema.
 
 
