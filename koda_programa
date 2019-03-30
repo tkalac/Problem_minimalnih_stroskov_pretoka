@@ -1,7 +1,17 @@
-'''Definiramo funkcijo, ki programu vrne izracunane stroske pretoka; to je funkcija, ki jo zelimo minimalizirati.'''
-def cf(AB, AF, BC, BD, CE, DF, ED, EG, FG):
-	return(AB*200+AF*500+BC*200+BD*400+CE*200+DF*200+ED*200+EG*500+FG*100)
+'''Definiramo funkcijo, ki programu vrne izracunane stroske pretoka; to je funkcija,
+ki jo zelimo minimalizirati. Zmnoži preok na vsaki povezavi ter ceno'''
+def cf(pov):
+    sum = 0
+    for i in pov:
+        sum += i.cena*i.pretok
+    return sum
 
+'''Definiramo razred za povezave, ki vsebuje ime, ceno ter optimalni pretok'''
+class pot():
+    def __init__(self, ime_, cena_, pretok_):
+        self.ime = ime_
+        self.cena = cena_
+        self.pretok = pretok_
 
 '''Definramo izvore in ponore materiala'''
 A=40
@@ -15,12 +25,22 @@ AFm=20
 BDm=80
 EGm=60
 
-'''Inicializiramo seznam, ki zajema stroske pretoka (na prvem mestu)
-in vse pretoke v formatu [AB, AF, BC, BD, CE, DF, ED, EG, FG].
-Zacetni stroski so zelo visoki, saj zelimo, da jih program nadomesti
-z manjsimi vrednostmi.'''
+'''Definiramo povezave in cene'''
+AB = pot("AB", 200, 0)
+AF = pot("AF", 500, 0)
+BC = pot("BC", 200, 0)
+BD = pot("BD", 400, 0)
+CE = pot("BD", 200, 0)
+DF = pot("DF", 200, 0)
+ED = pot("ED", 200, 0)
+EG = pot("EG", 500, 0)
+FG = pot("FG", 100, 0)
 
-minCost=[200000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+'''Inicializiramo seznam pretokov v formatu [AB, AF, BC, BD, CE, DF, ED, EG, FG]'''
+povezave = [AB, AF, BC, BD, CE, DF, ED, EG, FG]
+
+'''Inicializiramo spremenljivko, v kateri so stroški prevoza'''
+minCost=200000
 
 
 '''Sledi algoritem, ki vsebuje tri vgnezdene zanke. Vsaka izmed zank inkrementira vrednosti
@@ -29,17 +49,22 @@ in s tem preizkusi vse možne kombinacije, ter sproti preračuna preostale preto
 V sredini vseh zank je pogojna izjava, ki v primeru skladanja s pogoji (vsi pretoki > 0; stroški < prejšnjih)
 posodobi seznam minCost, ki smo ga inicializirali prej ter ga natisne.'''
 
-for AF in range(AFm+1): #Prva zanka za AF
-	AB=A-AF
-	for BD in range(BDm+1):
-		BC=AB+B-BD
-		CE=BC+C
-		for EG in range(EGm+1):
-			ED=CE-EG
-			DF=BD+ED
-			FG=AF+DF+F
-			if(all(i>=0 for i in (AB, AF, BC, BD, CE, DF, ED, EG, FG)) and cf(AB, AF, BC, BD, CE, DF, ED, EG, FG) < minCost[0]):
-				minCost = [cf(AB, AF, BC, BD, CE, DF, ED, EG, FG), AB, AF, BC, BD, CE, DF, ED, EG, FG]
-				print(minCost)
+for af in range(AFm+1): #Prva zanka za AF
+	AF.pretok = af
+	AB.pretok=A-AF.pretok
+	for bd in range(BDm+1): # Druga zanka za BD
+		BD.pretok = bd
+		BC.pretok=AB.pretok+B-BD.pretok
+		CE.pretok=BC.pretok+C
+		for eg in range(EGm+1): #Tretja zanka za EG
+			EG.pretok = eg
+			ED.pretok=CE.pretok-EG.pretok
+			DF.pretok=BD.pretok+ED.pretok
+			FG.pretok=AF.pretok+DF.pretok+F
+			#Preverimo pogoje; povezave > 0 in novi strški < starih
+			if(all(i.pretok>=0 for i in povezave) and cf(povezave) < minCost): 
+				minCost = cf(povezave)
+				l = [i.pretok for i in povezave]
+				print(l, minCost)
 
-'''Zadnji natiskan seznam vsebuje kombinacijo pretokov  minimalnimi strosko'''
+print("Zadnja vrstica je optimalna rešitev programa")
