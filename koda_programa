@@ -38,7 +38,7 @@ for AF in range(AFm+1): #Prva zanka za AF
 			ED=CE-EG
 			DF=BD+ED
 			FG=AF+DF+F
-			if(AB>=0 and AF>=0 and BC>=0 and BD>=0 and CE>=0 and DF>=0 and ED>=0 and EG>=0 and FG>=0 and cf(AB, AF, BC, BD, CE, DF, ED, EG, FG) < minCost[0]):
+			if(all(i>=0 for i in (AB, AF, BC, BD, CE, DF, ED, EG, FG)) and cf(AB, AF, BC, BD, CE, DF, ED, EG, FG) < minCost[0]):
 				minCost = [cf(AB, AF, BC, BD, CE, DF, ED, EG, FG), AB, AF, BC, BD, CE, DF, ED, EG, FG]
 				print(minCost)
 
